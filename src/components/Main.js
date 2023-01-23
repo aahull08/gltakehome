@@ -1,0 +1,106 @@
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import RepoModel from "./RepoModel";
+
+const Main = () => {
+  const headers = [
+    "Repo Name",
+    "Language",
+    "Description",
+    "Star Count",
+    "Fork Count",
+    "Date Created",
+  ];
+
+  const [repos, setRepos] = useState([]);
+  const [modelDisplay, setModelDisplay] = useState(false);
+  const [repoURL, setRepoURL] = useState();
+
+  useEffect(() => {
+    const getRepos = async () => {
+      try {
+        const repoData = await axios.get(
+          "https://api.github.com/orgs/Netflix/repos"
+        );
+        console.log(repoData);
+        repoData.data.sort((a, b) => b.stargazers_count - a.stargazers_count);
+        setRepos(repoData.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    getRepos();
+  }, []);
+
+  const handleRepoClick = (commits_url) => {
+    setModelDisplay(true);
+    setRepoURL(commits_url.slice(0, -6));
+  };
+
+  return (
+    <>
+      <div className="RepoList">
+        <TableContainer
+          sx={{
+            ml: "60px",
+            mt: "10px",
+            mr: "60px",
+            width: "auto",
+            boxShadow: 1,
+          }}
+          component={Paper}>
+          <Table sx={{ minWidth: 350 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                {headers.map((header) => {
+                  return <TableCell key={header}>{header}</TableCell>;
+                })}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {repos.map((repo) => (
+                <TableRow
+                  key={repo.id}
+                  data-id={repo.id}
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "#ECEFF4",
+                      cursor: "pointer",
+                    },
+                  }}
+                  onClick={() => handleRepoClick(repo.commits_url)}>
+                  <TableCell>{repo.name}</TableCell>
+                  <TableCell>{repo.language || "N/A"}</TableCell>
+                  <TableCell>{repo.description || "N/A"}</TableCell>
+                  <TableCell>{repo.stargazers_count || "N/A"}</TableCell>
+                  <TableCell>{repo.forks_count || "N/A"}</TableCell>
+                  <TableCell>{repo.created_at.slice(0, 10) || "N/A"}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        {!modelDisplay ? null : (
+          <RepoModel
+            commits_url={repoURL}
+            setModelDisplay={setModelDisplay}
+            modelDisplay={modelDisplay}
+          />
+        )}
+      </div>
+      );
+    </>
+  );
+};
+
+export default Main;
