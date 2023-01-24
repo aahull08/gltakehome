@@ -10,6 +10,7 @@ import {
 import { useState, useEffect } from "react";
 import axios from "axios";
 import RepoModel from "./RepoModel";
+import SearchArea from "./SearchArea";
 
 const Main = () => {
   const headers = [
@@ -23,15 +24,15 @@ const Main = () => {
 
   const [repos, setRepos] = useState([]);
   const [modelDisplay, setModelDisplay] = useState(false);
-  const [repoURL, setRepoURL] = useState();
+  const [repoURL, setRepoURL] = useState("");
+  const [companyName, setCompanyName] = useState("");
 
   useEffect(() => {
     const getRepos = async () => {
       try {
         const repoData = await axios.get(
-          "https://api.github.com/orgs/Netflix/repos"
+          `https://api.github.com/orgs/${companyName || "Netflix"}/repos`
         );
-        console.log(repoData);
         repoData.data.sort((a, b) => b.stargazers_count - a.stargazers_count);
         setRepos(repoData.data);
       } catch (error) {
@@ -40,15 +41,21 @@ const Main = () => {
     };
 
     getRepos();
-  }, []);
+  }, [companyName]);
 
   const handleRepoClick = (commits_url) => {
     setModelDisplay(true);
     setRepoURL(commits_url.slice(0, -6));
   };
 
+  const handleSubmit = (e, newCompany) => {
+    e.preventDefault();
+    setCompanyName(newCompany);
+  };
+
   return (
     <>
+      <SearchArea handleSubmit={handleSubmit} />
       <div className="RepoList">
         <TableContainer
           sx={{
