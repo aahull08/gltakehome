@@ -49,9 +49,11 @@ const Main = () => {
     getRepos();
   }, [companyName, navigate]);
 
-  const handleRepoClick = (commits_url) => {
+  const handleRepoClick = (e, repo) => {
     setModelDisplay(true);
-    setRepoURL(commits_url.slice(0, -6));
+    let repoName = e.currentTarget.firstChild.textContent;
+    navigate(`/${companyName}/${repoName}`);
+    setRepoURL(repo.commits_url.slice(0, -6));
   };
 
   const handleSubmit = (e, newCompany) => {
@@ -97,7 +99,7 @@ const Main = () => {
                       cursor: "pointer",
                     },
                   }}
-                  onClick={() => handleRepoClick(repo.commits_url)}>
+                  onClick={(e) => handleRepoClick(e, repo)}>
                   <TableCell>{repo.name}</TableCell>
                   <TableCell>{repo.language || "N/A"}</TableCell>
                   <TableCell>{repo.description || "N/A"}</TableCell>

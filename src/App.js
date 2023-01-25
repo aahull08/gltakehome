@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Main from "./components/Main";
 // import "./App.css";
@@ -16,9 +16,9 @@ function App() {
       }}>
       <Layout>
         <Routes>
-          {/* <Route path="/" element={<Navigate to="/sessions" />} /> */}
+          <Route path="/" element={<Navigate to="/:companyName" />} />
+          <Route path="/:companyName/:repoName" element={<Main />} />
           <Route path="/:companyName" element={<Main />} />
-          {/* <Route path="/sessions" element={<SessionList />} /> */}
         </Routes>
       </Layout>
     </Box>
