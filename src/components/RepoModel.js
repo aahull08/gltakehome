@@ -11,6 +11,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 const style = {
   position: "absolute",
@@ -48,6 +49,15 @@ const RepoModel = ({ commits_url, setModelDisplay, modelDisplay }) => {
   return (
     <Modal open={modelDisplay} onClose={handleClose}>
       <Box sx={style}>
+        <CloseIcon
+          sx={{
+            position: "absolute",
+            top: "5px",
+            right: "5px",
+            cursor: "pointer",
+          }}
+          onClick={handleClose}
+        />
         <TableContainer
           sx={{
             ml: "60px",

@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Main from "./components/Main";
@@ -5,7 +6,14 @@ import Main from "./components/Main";
 
 function App() {
   return (
-    <div className="App">
+    <Box
+      className="App"
+      sx={{
+        width: "fit-content",
+        "@media (min-width: 730px)": {
+          width: "100%",
+        },
+      }}>
       <Layout>
         <Routes>
           {/* <Route path="/" element={<Navigate to="/sessions" />} /> */}
@@ -18,7 +26,7 @@ function App() {
           <Route path="/funnels/:funnelId" element={<Funnel />} /> */}
         </Routes>
       </Layout>
-    </div>
+    </Box>
   );
 }
 

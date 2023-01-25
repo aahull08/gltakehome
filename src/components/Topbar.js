@@ -8,12 +8,14 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   return (
-    <Box sx={{ flexGrow: 1, pl: "0px" }}>
-      <AppBar position="static" sx={{ bgcolor: "#34384C" }}>
-        <Toolbar varient="dense">
+    <Box sx={{ width: "auto" }}>
+      <AppBar
+        position="static"
+        sx={{ width: "auto", bgcolor: "#34384C", minWidth: "100%" }}>
+        <Toolbar>
           <Button
             variant="text"
-            sx={{ color: "white", ml: "15px" }}
+            sx={{ color: "white" }}
             onClick={() => navigate("/")}>
             Find Reposatories
           </Button>

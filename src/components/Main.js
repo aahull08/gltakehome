@@ -1,5 +1,7 @@
 import {
+  Box,
   Paper,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -11,6 +13,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import RepoModel from "./RepoModel";
 import SearchArea from "./SearchArea";
+import Title from "./Title";
 
 const Main = () => {
   const headers = [
@@ -25,13 +28,13 @@ const Main = () => {
   const [repos, setRepos] = useState([]);
   const [modelDisplay, setModelDisplay] = useState(false);
   const [repoURL, setRepoURL] = useState("");
-  const [companyName, setCompanyName] = useState("");
+  const [companyName, setCompanyName] = useState("Netflix");
 
   useEffect(() => {
     const getRepos = async () => {
       try {
         const repoData = await axios.get(
-          `https://api.github.com/orgs/${companyName || "Netflix"}/repos`
+          `https://api.github.com/orgs/${companyName}/repos`
         );
         repoData.data.sort((a, b) => b.stargazers_count - a.stargazers_count);
         setRepos(repoData.data);
@@ -54,18 +57,24 @@ const Main = () => {
   };
 
   return (
-    <>
-      <SearchArea handleSubmit={handleSubmit} />
-      <div className="RepoList">
-        <TableContainer
-          sx={{
-            ml: "60px",
-            mt: "10px",
-            mr: "60px",
-            width: "auto",
-            boxShadow: 1,
-          }}
-          component={Paper}>
+    <Box
+      sx={{
+        ml: "15px",
+        mt: "10px",
+        mr: "15px",
+        width: "auto",
+        minWidth: "700px",
+      }}>
+      <Stack
+        direction="row"
+        justifyContent="space-around"
+        alignItems="center"
+        spacing={0.5}>
+        <Title companyName={companyName} />
+        <SearchArea handleSubmit={handleSubmit} />
+      </Stack>
+      <Box>
+        <TableContainer component={Paper}>
           <Table sx={{ minWidth: 350 }} aria-label="simple table">
             <TableHead>
               <TableRow>
@@ -104,9 +113,8 @@ const Main = () => {
             modelDisplay={modelDisplay}
           />
         )}
-      </div>
-      );
-    </>
+      </Box>
+    </Box>
   );
 };
 

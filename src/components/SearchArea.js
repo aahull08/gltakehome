@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Button, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 
 const SearchArea = ({ handleSubmit }) => {
@@ -9,16 +9,22 @@ const SearchArea = ({ handleSubmit }) => {
 
   return (
     <form onSubmit={(e) => handleSubmit(e, value)}>
-      <TextField
-        id="standard-helperText"
-        label="Repo Name"
-        value={value}
-        variant="standard"
-        onChange={handleChange}
-      />
-      <Button variant="contained" type="submit">
-        Submit
-      </Button>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="flex-end"
+        spacing={1}>
+        <TextField
+          id="standard-helperText"
+          label="Repo Name"
+          value={value}
+          variant="standard"
+          onChange={handleChange}
+        />
+        <Button variant="contained" type="submit">
+          Submit
+        </Button>
+      </Stack>
     </form>
   );
 };
