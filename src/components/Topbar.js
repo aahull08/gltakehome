@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -17,7 +17,9 @@ const Sidebar = () => {
             variant="text"
             sx={{ color: "white" }}
             onClick={() => navigate("/")}>
-            Find Reposatories
+            <Typography variant="h5" sx={{ fontSize: "24px" }}>
+              Find Reposatories
+            </Typography>
           </Button>
         </Toolbar>
       </AppBar>

@@ -14,6 +14,7 @@ import axios from "axios";
 import RepoModel from "./RepoModel";
 import SearchArea from "./SearchArea";
 import Title from "./Title";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const headers = [
@@ -29,6 +30,7 @@ const Main = () => {
   const [modelDisplay, setModelDisplay] = useState(false);
   const [repoURL, setRepoURL] = useState("");
   const [companyName, setCompanyName] = useState("Netflix");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getRepos = async () => {
@@ -39,12 +41,13 @@ const Main = () => {
         repoData.data.sort((a, b) => b.stargazers_count - a.stargazers_count);
         setRepos(repoData.data);
       } catch (error) {
+        setRepos([]);
         console.log(error.message);
       }
     };
-
+    navigate(`/${companyName}`);
     getRepos();
-  }, [companyName]);
+  }, [companyName, navigate]);
 
   const handleRepoClick = (commits_url) => {
     setModelDisplay(true);

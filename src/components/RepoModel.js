@@ -20,7 +20,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   height: "75%",
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  // border: "2px solid #000",
   boxShadow: 24,
   p: 4,
   overflow: "scroll",
@@ -84,7 +84,6 @@ const RepoModel = ({ commits_url, setModelDisplay, modelDisplay }) => {
                   sx={{
                     "&:hover": {
                       backgroundColor: "#ECEFF4",
-                      cursor: "pointer",
                     },
                   }}>
                   <TableCell>{commit.commit.message}</TableCell>
