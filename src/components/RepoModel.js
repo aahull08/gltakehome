@@ -10,6 +10,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -26,7 +27,12 @@ const style = {
   overflow: "scroll",
 };
 
-const RepoModel = ({ commits_url, setModelDisplay, modelDisplay }) => {
+const RepoModel = ({
+  commits_url,
+  setModelDisplay,
+  modelDisplay,
+  repoTitle,
+}) => {
   const headers = [
     "Commit Title",
     "Committer username",
@@ -58,6 +64,9 @@ const RepoModel = ({ commits_url, setModelDisplay, modelDisplay }) => {
           }}
           onClick={handleClose}
         />
+        <Typography variant="h3" sx={{ textAlign: "center" }}>
+          {repoTitle}
+        </Typography>
         <TableContainer
           sx={{
             ml: "60px",

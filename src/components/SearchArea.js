@@ -16,7 +16,7 @@ const SearchArea = ({ handleSubmit }) => {
         spacing={1}>
         <TextField
           id="standard-helperText"
-          label="Repo Name"
+          label="Organization Name"
           value={value}
           variant="standard"
           onChange={handleChange}

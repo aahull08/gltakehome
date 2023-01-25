@@ -30,6 +30,7 @@ const Main = () => {
   const [modelDisplay, setModelDisplay] = useState(false);
   const [repoURL, setRepoURL] = useState("");
   const [companyName, setCompanyName] = useState("Netflix");
+  const [repoTitle, setRepoTitle] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -52,7 +53,7 @@ const Main = () => {
   const handleRepoClick = (e, repo) => {
     setModelDisplay(true);
     let repoName = e.currentTarget.firstChild.textContent;
-    navigate(`/${companyName}/${repoName}`);
+    setRepoTitle(repoName);
     setRepoURL(repo.commits_url.slice(0, -6));
   };
 
@@ -116,6 +117,7 @@ const Main = () => {
             commits_url={repoURL}
             setModelDisplay={setModelDisplay}
             modelDisplay={modelDisplay}
+            repoTitle={repoTitle}
           />
         )}
       </Box>

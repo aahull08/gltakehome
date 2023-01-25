@@ -17,7 +17,6 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Navigate to="/:companyName" />} />
-          <Route path="/:companyName/:repoName" element={<Main />} />
           <Route path="/:companyName" element={<Main />} />
         </Routes>
       </Layout>
