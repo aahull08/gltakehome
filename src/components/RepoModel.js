@@ -71,9 +71,9 @@ const RepoModel = ({
         </Typography>
         <TableContainer
           sx={{
-            ml: "60px",
+            ml: "20px",
             mt: "10px",
-            mr: "60px",
+            mr: "20px",
             width: "auto",
             maxHeight: "200",
             boxShadow: 1,
