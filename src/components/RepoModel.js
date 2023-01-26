@@ -21,7 +21,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   height: "75%",
   bgcolor: "background.paper",
-  // border: "2px solid #000",
   boxShadow: 24,
   p: 4,
   overflow: "scroll",
@@ -53,7 +52,10 @@ const RepoModel = ({
   }, [commits_url]);
 
   return (
-    <Modal open={modelDisplay} onClose={handleClose}>
+    <Modal
+      open={modelDisplay}
+      onClose={handleClose}
+      sx={{ width: "auto", overflowX: "scroll" }}>
       <Box sx={style}>
         <CloseIcon
           sx={{
@@ -64,7 +66,7 @@ const RepoModel = ({
           }}
           onClick={handleClose}
         />
-        <Typography variant="h3" sx={{ textAlign: "center" }}>
+        <Typography variant="h3" sx={{ textAlign: "center", width: "95%" }}>
           {repoTitle}
         </Typography>
         <TableContainer
