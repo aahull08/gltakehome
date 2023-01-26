@@ -16,7 +16,7 @@ function App() {
       }}>
       <Layout>
         <Routes>
-          <Route path="/" element={<Navigate to="/:companyName" />} />
+          <Route path="/" element={<Navigate to="/Netflix" />} />
           <Route path="/:companyName" element={<Main />} />
         </Routes>
       </Layout>

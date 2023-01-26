@@ -55,7 +55,7 @@ const RepoModel = ({
     <Modal
       open={modelDisplay}
       onClose={handleClose}
-      sx={{ width: "auto", overflowX: "scroll" }}>
+      sx={{ width: "", overflowX: "scroll" }}>
       <Box sx={style}>
         <CloseIcon
           sx={{
