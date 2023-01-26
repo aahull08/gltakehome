@@ -1,18 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  Box,
-  Modal,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { Box, Modal, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import CommitsTable from "./CommitsTable";
 
 const style = {
   position: "absolute",
@@ -32,13 +22,6 @@ const RepoModel = ({
   modelDisplay,
   repoTitle,
 }) => {
-  const headers = [
-    "Commit Title",
-    "Committer username",
-    "Commit hash",
-    "Date Created",
-  ];
-
   const [commits, setCommits] = useState([]);
   const handleClose = () => setModelDisplay(false);
 
@@ -55,7 +38,7 @@ const RepoModel = ({
     <Modal
       open={modelDisplay}
       onClose={handleClose}
-      sx={{ width: "", overflowX: "scroll" }}>
+      sx={{ overflowX: "scroll" }}>
       <Box sx={style}>
         <CloseIcon
           sx={{
@@ -69,47 +52,7 @@ const RepoModel = ({
         <Typography variant="h3" sx={{ textAlign: "center", width: "95%" }}>
           {repoTitle}
         </Typography>
-        <TableContainer
-          sx={{
-            ml: "20px",
-            mt: "10px",
-            mr: "20px",
-            width: "auto",
-            maxHeight: "200",
-            boxShadow: 1,
-          }}
-          component={Paper}>
-          <Table sx={{ minWidth: 350 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                {headers.map((header) => {
-                  return <TableCell key={header}>{header}</TableCell>;
-                })}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {commits.map((commit) => (
-                <TableRow
-                  key={commit.node_id}
-                  data-id={commit.node_id}
-                  sx={{
-                    "&:hover": {
-                      backgroundColor: "#ECEFF4",
-                    },
-                  }}>
-                  <TableCell>{commit.commit.message}</TableCell>
-                  <TableCell>
-                    {commit.committer ? commit.committer.login : "N/A"}
-                  </TableCell>
-                  <TableCell>{commit.sha || "N/A"}</TableCell>
-                  <TableCell>
-                    {commit.commit.author.date.slice(0, 10) || "N/A"}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <CommitsTable commits={commits} />
       </Box>
     </Modal>
   );
