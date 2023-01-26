@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography } from "@mui/material";
 
-const Sidebar = () => {
+const Topbar = () => {
   const navigate = useNavigate();
 
   return (
@@ -27,4 +27,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Topbar;
