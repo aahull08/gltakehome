@@ -15,6 +15,10 @@ jobs:
           github-token: "${{secrets.GITHUB_TOKEN}}"
           script: |
             const payload = github.context.payload;
+            if (!payload) {
+              console.error('Payload  not found in the context.');
+              process.exit(1); // Exit with an error code
+            }
             if (payload && payload.pull_request) {
               const title = payload.pull_request.title;
               const prNumber = payload.pull_request.number;
