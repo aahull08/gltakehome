@@ -19,6 +19,7 @@ jobs:
               console.error('github not found.');
               process.exit(1); // Exit with an error code
             }
+            console.log(github)
             if (!github.context){
               console.error('context not found in the context.');
               process.exit(1); // Exit with an error code
